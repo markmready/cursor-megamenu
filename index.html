@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Menu Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="masthead">
+    <div class="bento-box">
+        <button class="masthead-toggle" aria-label="Toggle Mega Menu" aria-expanded="false" aria-controls="megaMenuPanel" id="megaMenuToggle">
+  <img id="bentoClosed" src="icons/Bento/Bento=Closed.svg" alt="Open Mega Menu" width="24">
+  <img id="bentoHover" src="icons/Bento/Bento=Hover.svg" alt="Open Mega Menu (Hover)" width="24" style="display:none;">
+  <img id="bentoOpen" src="icons/Bento/Bento=Open.svg" alt="Close Mega Menu" width="24" style="display:none;">
+</button>
+        <div class="masthead-left"><img src="icons/LOGO MASTER.svg" alt="ReadyWorkforce Logo" height="23"><span class="sr-only">ReadyWorkforce</span></div>
+    </div>
+</header>
+    <nav class="mega-menu dark-panel hidden" aria-label="Main Mega Menu" id="megaMenuPanel">
+        <div class="menu-panel-content" id="main-content">
+            <h2 class="panel-title">Your end-to-end workforce management platform 🚀</h2>
+            <div class="card-row">
+    <!-- Selected Card Example -->
+    <div class="card selected" aria-current="page" tabindex="0">
+        <div class="card-header">
+            <div class="card-icon"><img src="icons/cards/Core.svg" alt="Payroll, Rostering, Time & Attendance Icon" width="32" height="32"></div>
+            <div class="card-badge active">ACTIVE</div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <div class="card-title">Payroll, Rostering, Time & Attendance</div>
+                <div class="card-description">Core workforce operations and employee record</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            You are here <img src="icons/MapPinSimple.svg" alt="You are here" width="16" height="16" style="margin-left: 2px; vertical-align: middle;" />
+        </div>
+    </div>
+    <!-- Active Card Example -->
+    <a href="https://www.readytech.io" target="_blank" class="card-link">
+    <div class="card active">
+        <div class="card-header">
+            <div class="card-icon"><img src="icons/cards/Recruite.svg" alt="Recruitment Icon" width="32" height="32"></div>
+            <div class="card-badge active">ACTIVE</div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <div class="card-title">Recruitment</div>
+                <div class="card-description">Supporting the full recruitment lifecycle</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            Go to Recruitment <img class="card-chevron" src="icons/CaretRight.svg" alt="Go to Recruitment" width="16" height="16" style="margin-left: 2px; vertical-align: middle;" />
+        </div>
+    </div>
+</a>
+    <!-- Available Card Example -->
+    <a href="https://www.readytech.io" target="_blank" class="card-link">
+    <div class="card available">
+        <div class="card-header">
+            <div class="card-icon"><img src="icons/cards/Talent.svg" alt="Talent Icon" width="32" height="32"></div>
+            <div class="card-badge available">AVAILABLE</div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <div class="card-title">Talent</div>
+                <div class="card-description">Manage feedback, development & performance</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            Learn more <img class="card-chevron" src="icons/CaretRight.svg" alt="Learn more" width="16" height="16" style="margin-left: 2px; vertical-align: middle;" />
+        </div>
+    </div>
+</a>
+    <!-- Coming Soon Card Example -->
+    <a href="https://www.readytech.io" target="_blank" class="card-link">
+    <div class="card soon">
+        <div class="card-header">
+            <div class="card-icon"><img src="icons/cards/Learning.svg" alt="Learning Icon" width="32" height="32"></div>
+            <div class="card-badge soon">COMING SOON</div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <div class="card-title">Learning</div>
+                <div class="card-description">Create & deliver learning programs and certifications</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            Learn more <img class="card-chevron" src="icons/CaretRight.svg" alt="Learn more" width="16" height="16" style="margin-left: 2px; vertical-align: middle;" />
+        </div>
+    </div>
+</a>
+
+                <a href="https://www.readytech.io" target="_blank" class="card-link">
+    <div class="card active">
+        <div class="card-header">
+            <div class="card-icon"><img src="icons/cards/Rewards.svg" alt="Rewards & Benefits Icon" width="32" height="32"></div>
+            <div class="card-badge active">ACTIVE</div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <div class="card-title">Rewards & Benefits</div>
+                <div class="card-description">Support wellbeing, benefits, and reward programs</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            Go to Brownie Points <img class="card-chevron" src="icons/CaretRight.svg" alt="Go to Brownie Points" width="16" height="16" style="margin-left: 2px; vertical-align: middle;" />
+        </div>
+    </div>
+</a>
+
+                <a href="https://www.readytech.io" target="_blank" class="card-link">
+    <div class="card available">
+        <div class="card-header">
+            <div class="card-icon"><img src="icons/cards/Analytics.svg" alt="Analytics & Insights Icon" width="32" height="32"></div>
+            <div class="card-badge available">AVAILABLE</div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <div class="card-title">Analytics & Insights</div>
+                <div class="card-description">Unlock actionable insights and trends</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            Learn more <img class="card-chevron" src="icons/CaretRight.svg" alt="Learn more" width="16" height="16" style="margin-left: 2px; vertical-align: middle;" />
+        </div>
+    </div>
+</a>
+
+                <a href="https://www.readytech.io" target="_blank" class="card-link">
+    <div class="card active">
+        <div class="card-header">
+            <div class="card-icon"><img src="icons/cards/App.svg" alt="Mobile & Web Experience Icon" width="32" height="32"></div>
+            <div class="card-badge active">ACTIVE</div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <div class="card-title">Mobile & Web experience</div>
+                <div class="card-description">On-the-go access to manager & employee self-service</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            Learn more <img class="card-chevron" src="icons/CaretRight.svg" alt="Learn more" width="16" height="16" style="margin-left: 2px; vertical-align: middle;" />
+        </div>
+    </div>
+</a>
+</a>
+                </div>
+            </div>
+            <div class="panel-footer">
+                Explore everything else that ReadyTech has to offer at <span class="footer-link"><a href="https://readytech.io" target="_blank">readytech.io<img src="icons/ArrowUpRight.svg" alt="External Link" width="14" height="14" style="position: relative; top: -3px; margin-left: 4px;"></span>
+            </div>
+        </div>
+        </div>
+    </nav>
+    <script src="script.js"></script>
+</body>
+</html>
