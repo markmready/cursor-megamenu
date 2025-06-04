@@ -2,6 +2,10 @@
 
 A modern, accessible mega menu implementation for the ReadyWorkforce platform. Built with vanilla JavaScript and CSS, featuring a responsive design and full keyboard navigation support.
 
+## Live Demo
+
+Check out the live demo on GitHub Pages: [ReadyWorkforce Mega Menu Demo](https://markmready.github.io/cursor-megamenu/)
+
 ## Features
 
 - 🎯 Modern bento-style menu toggle
@@ -9,6 +13,14 @@ A modern, accessible mega menu implementation for the ReadyWorkforce platform. B
 - 📱 Responsive design for all devices
 - 🚀 Lightweight and dependency-free
 - 🎨 Clean, modern UI with card-based navigation
+
+## Keyboard Navigation
+
+- `Tab` / `Shift + Tab`: Navigate through focusable elements
+- `Enter` / `Space`: Open/close menu and activate cards
+- `Arrow Keys`: Navigate between cards
+- `Home` / `End`: Jump to first/last card
+- `Escape`: Close the menu
 
 ## Local Development
 
