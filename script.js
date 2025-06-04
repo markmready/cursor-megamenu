@@ -1,133 +1,92 @@
+/**
+ * ReadyWorkforce Mega Menu JavaScript
+ * This file handles all the interactive functionality for the mega menu system,
+ * including accessibility features, mobile responsiveness, and user interactions.
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Mega menu toggle logic with animation, accessibility, and icon update
+    // DOM Elements
     const megaMenuToggle = document.getElementById('megaMenuToggle');
     const megaMenuPanel = document.getElementById('megaMenuPanel');
     const bentoClosed = document.getElementById('bentoClosed');
     const bentoHover = document.getElementById('bentoHover');
     const bentoOpen = document.getElementById('bentoOpen');
-    const focusableSelectors = 'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
+    
+    // Constants
+    const FOCUSABLE_SELECTORS = 'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
+    const MOBILE_BREAKPOINT = 768;
+    
+    // State
     let lastFocusedElement = null;
+    let focusTrapHandler = null;
 
-    // --- All logic below uses these variables only ---
-
+    /**
+     * Updates the bento icon state based on the specified state
+     * @param {string} state - The state of the bento icon ('closed', 'hover', or 'open')
+     */
     function showBento(state) {
         bentoClosed.style.display = (state === 'closed') ? '' : 'none';
         bentoHover.style.display = (state === 'hover') ? '' : 'none';
         bentoOpen.style.display = (state === 'open') ? '' : 'none';
     }
-    function updateBentoState() {
-        if (megaMenuPanel.classList.contains('hidden')) {
-            showBento('closed');
-        } else {
-            showBento('open');
-        }
-    }
-    // Initial icon state
-    updateBentoState();
 
+    /**
+     * Updates the bento icon based on the mega menu's visibility state
+     */
+    function updateBentoState() {
+        showBento(megaMenuPanel.classList.contains('hidden') ? 'closed' : 'open');
+    }
+
+    /**
+     * Opens the mega menu and sets up focus trap
+     */
     function openMegaMenu() {
         megaMenuPanel.classList.remove('hidden');
         megaMenuToggle.setAttribute('aria-expanded', 'true');
         lastFocusedElement = document.activeElement;
-        // Trap focus inside the menu
         trapFocus(megaMenuPanel);
         updateBentoState();
     }
 
+    /**
+     * Closes the mega menu and restores focus
+     */
     function closeMegaMenu() {
         megaMenuPanel.classList.add('hidden');
         megaMenuToggle.setAttribute('aria-expanded', 'false');
-        // Restore focus to last focused element
         if (lastFocusedElement) lastFocusedElement.focus();
         releaseFocusTrap();
         updateBentoState();
     }
 
-    megaMenuToggle.addEventListener('click', function(e) {
-        e.stopPropagation(); // Prevent bubbling to window/document
-        if (megaMenuPanel.classList.contains('hidden')) {
-            openMegaMenu();
-        } else {
-            closeMegaMenu();
-        }
-    });
-
-    megaMenuToggle.addEventListener('mouseenter', () => {
-        if (megaMenuPanel.classList.contains('hidden')) {
-            showBento('hover');
-        }
-    });
-    megaMenuToggle.addEventListener('mouseleave', () => {
-        updateBentoState();
-    });
-
-    // Accessibility: close menu with Escape
-    megaMenuPanel.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeMegaMenu();
-        }
-    });
-
-    // Focus trap implementation
-    let focusTrapHandler = null;
+    /**
+     * Implements focus trapping for accessibility
+     * @param {HTMLElement} container - The container to trap focus within
+     */
     function trapFocus(container) {
-        const focusableEls = container.querySelectorAll(focusableSelectors);
+        const focusableEls = container.querySelectorAll(FOCUSABLE_SELECTORS);
         const firstEl = focusableEls[0];
         const lastEl = focusableEls[focusableEls.length - 1];
+
         focusTrapHandler = function(e) {
             if (e.key !== 'Tab') return;
-            if (e.shiftKey) {
-                if (document.activeElement === firstEl) {
-                    e.preventDefault();
-                    lastEl.focus();
-                }
-            } else {
-                if (document.activeElement === lastEl) {
-                    e.preventDefault();
-                    firstEl.focus();
-                }
+
+            if (e.shiftKey && document.activeElement === firstEl) {
+                e.preventDefault();
+                lastEl.focus();
+            } else if (!e.shiftKey && document.activeElement === lastEl) {
+                e.preventDefault();
+                firstEl.focus();
             }
         };
+
         container.addEventListener('keydown', focusTrapHandler);
-        document.addEventListener('DOMContentLoaded', () => {
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuList = document.querySelector('.menu-list');
-    
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            menuList.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-    }
-
-    // Mega menu hover functionality
-    const menuItems = document.querySelectorAll('.menu-item');
-    
-    menuItems.forEach(item => {
-        if (item.classList.contains('has-submenu')) {
-            const megaPanel = item.querySelector('.mega-panel');
-            
-            item.addEventListener('mouseenter', () => {
-                megaPanel.style.display = 'block';
-            });
-
-            item.addEventListener('mouseleave', () => {
-                megaPanel.style.display = 'none';
-            });
-        }
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!menuList.contains(e.target) && !menuToggle.contains(e.target)) {
-            menuList.classList.remove('active');
-            menuToggle.classList.remove('active');
-        }
-    });
-});
         setTimeout(() => firstEl && firstEl.focus(), 10);
     }
+
+    /**
+     * Removes the focus trap event listener
+     */
     function releaseFocusTrap() {
         if (focusTrapHandler) {
             megaMenuPanel.removeEventListener('keydown', focusTrapHandler);
@@ -135,63 +94,72 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Optional: close menu when clicking outside
-    window.addEventListener('mousedown', function(e) {
-        // Don't close if clicking the toggle button or any of its children (the bento icons)
-        if (!megaMenuPanel.classList.contains('hidden') && !megaMenuPanel.contains(e.target) && !megaMenuToggle.contains(e.target)) {
+    // Event Listeners
+    
+    // Toggle menu on click
+    megaMenuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        megaMenuPanel.classList.contains('hidden') ? openMegaMenu() : closeMegaMenu();
+    });
+
+    // Bento icon hover effects
+    megaMenuToggle.addEventListener('mouseenter', () => {
+        if (megaMenuPanel.classList.contains('hidden')) {
+            showBento('hover');
+        }
+    });
+
+    megaMenuToggle.addEventListener('mouseleave', updateBentoState);
+
+    // Close menu with Escape key
+    megaMenuPanel.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
             closeMegaMenu();
         }
     });
 
-
-
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const menuItems = document.querySelector('.menu-items');
-
-    menuToggle.addEventListener('click', () => {
-        menuItems.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!menuToggle.contains(e.target) && !menuItems.contains(e.target)) {
-            menuItems.classList.remove('active');
+    // Close menu when clicking outside
+    window.addEventListener('mousedown', (e) => {
+        if (!megaMenuPanel.classList.contains('hidden') && 
+            !megaMenuPanel.contains(e.target) && 
+            !megaMenuToggle.contains(e.target)) {
+            closeMegaMenu();
         }
     });
 
-    // Mega menu hover effects
-    const menuItemsList = document.querySelectorAll('.menu-item');
-
-    menuItemsList.forEach(item => {
+    // Mobile Menu Functionality
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    menuItems.forEach(item => {
         const megaPanel = item.querySelector('.mega-panel');
-        
-        // Desktop hover effect
+        if (!megaPanel) return;
+
+        // Desktop hover effects
         item.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > MOBILE_BREAKPOINT) {
                 megaPanel.style.display = 'block';
             }
         });
 
         item.addEventListener('mouseleave', () => {
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > MOBILE_BREAKPOINT) {
                 megaPanel.style.display = 'none';
             }
         });
 
-        // Mobile click effect
+        // Mobile click effects
         item.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= MOBILE_BREAKPOINT) {
                 e.preventDefault();
                 megaPanel.classList.toggle('active');
             }
         });
     });
 
-    // Close mega panel when clicking outside on mobile
+    // Close mega panels when clicking outside on mobile
     document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-            menuItemsList.forEach(item => {
+        if (window.innerWidth <= MOBILE_BREAKPOINT) {
+            menuItems.forEach(item => {
                 const megaPanel = item.querySelector('.mega-panel');
                 if (megaPanel && !item.contains(e.target)) {
                     megaPanel.classList.remove('active');
@@ -199,4 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+
+    // Initialize bento state
+    updateBentoState();
 });
