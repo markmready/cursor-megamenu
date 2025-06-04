@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const bentoHover = document.getElementById('bentoHover');
     const bentoOpen = document.getElementById('bentoOpen');
     
+    // Set initial focus to the menu toggle
+    megaMenuToggle.focus();
+    
     // Constants
     const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
     const KEYCODES = {
