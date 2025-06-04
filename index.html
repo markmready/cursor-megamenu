@@ -22,19 +22,18 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Header with bento menu -->
-    <header class="masthead">
+    <header class="masthead" role="banner">
         <div class="bento-box">
-            <!-- Mega menu toggle button with icon states -->
             <button class="masthead-toggle" 
                     aria-label="Toggle Mega Menu" 
                     aria-expanded="false" 
                     aria-controls="megaMenuPanel" 
+                    aria-haspopup="true"
                     id="megaMenuToggle">
-                <img id="bentoClosed" src="./icons/Bento/Bento=Closed.svg" alt="Open Mega Menu" width="24">
-                <img id="bentoHover" src="./icons/Bento/Bento=Hover.svg" alt="Open Mega Menu (Hover)" width="24" style="display:none;">
-                <img id="bentoOpen" src="./icons/Bento/Bento=Open.svg" alt="Close Mega Menu" width="24" style="display:none;">
+                <img id="bentoClosed" src="./icons/Bento/Bento=Closed.svg" alt="" aria-hidden="true" width="24">
+                <img id="bentoHover" src="./icons/Bento/Bento=Hover.svg" alt="" aria-hidden="true" width="24" style="display:none;">
+                <img id="bentoOpen" src="./icons/Bento/Bento=Open.svg" alt="" aria-hidden="true" width="24" style="display:none;">
             </button>
-            <!-- Logo -->
             <div class="masthead-left">
                 <img src="./icons/LOGO MASTER.svg" alt="ReadyWorkforce Logo" height="23">
                 <span class="sr-only">ReadyWorkforce</span>
@@ -43,14 +42,21 @@
     </header>
 
     <!-- Main navigation mega menu -->
-    <nav class="mega-menu dark-panel hidden" aria-label="Main Mega Menu" id="megaMenuPanel">
-        <div class="menu-panel-content" id="main-content">
-            <h2 class="panel-title">Your end-to-end workforce management platform 🚀</h2>
+    <nav class="mega-menu dark-panel hidden" 
+         role="navigation" 
+         aria-label="Main Mega Menu" 
+         id="megaMenuPanel" 
+         aria-hidden="true">
+        <div class="menu-panel-content">
+            <h2 class="panel-title" id="menuHeading">Your end-to-end workforce management platform 🚀</h2>
             
             <!-- Card grid for navigation options -->
-            <div class="card-row">
+            <div class="card-row" role="menu" aria-labelledby="menuHeading">
                 <!-- Currently active module card -->
-                <div class="card selected" aria-current="page" tabindex="0">
+                <div class="card selected" 
+                     role="menuitem" 
+                     aria-current="page" 
+                     tabindex="0">
                     <div class="card-header">
                         <div class="card-icon">
                             <img src="./icons/Cards/Core.svg" alt="Payroll, Rostering, Time & Attendance Icon" width="32" height="32">
@@ -69,7 +75,11 @@
                 </div>
 
                 <!-- Active modules -->
-                <a href="https://www.readytech.io" target="_blank" class="card-link">
+                <a href="https://www.readytech.io" 
+                   target="_blank" 
+                   class="card-link" 
+                   role="menuitem" 
+                   aria-label="Go to Recruitment module">
                     <div class="card active">
                         <div class="card-header">
                             <div class="card-icon">
@@ -90,7 +100,11 @@
                 </a>
 
                 <!-- Available modules -->
-                <a href="https://www.readytech.io" target="_blank" class="card-link">
+                <a href="https://www.readytech.io" 
+                   target="_blank" 
+                   class="card-link" 
+                   role="menuitem" 
+                   aria-label="Learn more about Talent module">
                     <div class="card available">
                         <div class="card-header">
                             <div class="card-icon">
@@ -111,7 +125,11 @@
                 </a>
 
                 <!-- Coming soon modules -->
-                <a href="https://www.readytech.io" target="_blank" class="card-link">
+                <a href="https://www.readytech.io" 
+                   target="_blank" 
+                   class="card-link" 
+                   role="menuitem" 
+                   aria-label="Learn more about upcoming Learning module">
                     <div class="card soon">
                         <div class="card-header">
                             <div class="card-icon">
@@ -193,13 +211,14 @@
                 </a>
             </div>
             
-            <!-- Footer with external link -->
-            <div class="panel-footer">
+            <div class="panel-footer" role="contentinfo">
                 Explore everything else that ReadyTech has to offer at 
                 <span class="footer-link">
-                    <a href="https://readytech.io" target="_blank">
+                    <a href="https://readytech.io" 
+                       target="_blank" 
+                       aria-label="Visit ReadyTech website (opens in new tab)">
                         readytech.io
-                        <img src="./icons/ArrowUpRight.svg" alt="External Link" width="14" height="14" style="position: relative; top: -3px; margin-left: 4px;">
+                        <img src="./icons/ArrowUpRight.svg" alt="" aria-hidden="true" width="14" height="14">
                     </a>
                 </span>
             </div>
@@ -207,7 +226,7 @@
     </nav>
 
     <!-- Main content -->
-    <main class="main-content">
+    <main class="main-content" role="main" id="main-content">
         <div class="container">
             <h1>ReadyWorkforce Mega Menu Prototype</h1>
             <p class="intro">A modern, accessible mega menu implementation built with vanilla HTML, CSS, and JavaScript. This prototype demonstrates a clean, user-friendly navigation system for the ReadyWorkforce platform.</p>
